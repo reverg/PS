@@ -12,7 +12,7 @@ int main()
     for (int i = 99; i >= 0; i--)
     {
         if ('a' <= word[i] && word[i] <= 'z')
-            alphabet[word[i] - 'a'] = i+1;
+            alphabet[word[i] - 'a'] = i;
     }
 
     for (int i = 0; i < 26; i++)
