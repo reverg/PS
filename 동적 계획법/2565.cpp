@@ -14,6 +14,7 @@ int electric(int max_str)
         for (int j = 0; j < i; j++)
         {
             if (dst[i] > dst[j])
+                // 여기가 아래로 나가면 전깃줄 없는 부분이 line[i] = 1 됨
                 line[i] = max(line[i], line[j] + 1);
         }
         ans = max(ans, line[i]);
