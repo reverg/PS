@@ -48,7 +48,8 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "set": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "queue": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
