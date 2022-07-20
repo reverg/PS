@@ -2,8 +2,6 @@
 
 using namespace std;
 
-typedef int (*Matrix)[5];
-
 int n;
 long long b;
 int mat[5][5];
