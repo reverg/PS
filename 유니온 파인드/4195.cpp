@@ -1,8 +1,11 @@
 #include <iostream>
+#include <string>
+#include <map>
 
 using namespace std;
 
-int parent[500001];
+int parent[200001];
+int setSize[200001];
 
 int findSet(int x)
 {
@@ -12,46 +15,53 @@ int findSet(int x)
         return parent[x] = findSet(parent[x]); // path compression
 }
 
+int getSetSize(int x)
+{
+    return setSize[findSet(x)];
+}
+
 void unionSet(int a, int b)
 {
     a = findSet(a);
     b = findSet(b);
     if (a != b)
+    {
+        if (getSetSize(a) < getSetSize(b))
+            swap(a, b);
+        setSize[a] += setSize[b];
         parent[b] = a;
+    }
 }
 
 int main()
 {
     ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
 
-    int n, m;
-    cin >> n >> m;
-    for (int i = 1; i <= n; i++)
-        parent[i] = i;
-
-    int a, b;
-    int turn = 1;
-    bool finished = false;
-    while (m--)
+    int t, f;
+    cin >> t;
+    while (t--)
     {
-        cin >> a >> b;
-        int parent_a = findSet(b);
-        int parent_b = findSet(b);
-
-        if (parent_a == parent_b)
+        cin >> f;
+        for (int i = 1; i <= 2 * f + 1; i++)
         {
-            finished = true;
-            break;
+            parent[i] = i;
+            setSize[i] = 1;
         }
-        else
+
+        map<string, int> m;
+        string p1, p2;
+        int id = 1;
+        for (int i = 1; i <= f; i++)
         {
-            unionSet(parent_a, parent_b);
-            turn++;
+            cin >> p1 >> p2;
+            // give id to each person
+            if (m.count(p1) == 0)
+                m[p1] = id++;
+            if (m.count(p2) == 0)
+                m[p2] = id++;
+
+            unionSet(m[p1], m[p2]);
+            cout << getSetSize(m[p1]) << '\n';
         }
     }
-
-    if (finished)
-        cout << turn;
-    else
-        cout << '0';
 }
