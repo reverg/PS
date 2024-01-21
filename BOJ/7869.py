@@ -10,7 +10,7 @@ if __name__ == "__main__":
     d = dist((x1, y1), (x2, y2))
 
     if d >= r1 + r2:  # two circle do not meet
-        print("0")
+        print("0.000")
     elif d + min(r1, r2) <= max(r1, r2):  # one circle is in the another one
         A = pi * (min(r1, r2) ** 2)
         print(f"{round(A, 3):.3f}")
