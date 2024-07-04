@@ -1,2 +1,2 @@
 # PS
-알고리즘 공부 및 코딩테스트 준비를 위해 푼 문제들을 정리한 repository입니다.
+BOJ: https://solved.ac/profile/rivergreen1
