@@ -8,21 +8,43 @@ int N;
 int dp[1000001];
 int before[1000001];
 
-void GetInput()
+int main()
 {
-    cin >> N;
-}
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
-void Initialize()
-{
+    cin >> N;
+
     dp[1] = 0;
     before[1] = 0;
     for (int i = 2; i <= N; i++)
         dp[i] = INF;
-}
 
-void PrintResult()
-{
+    for (int i = 2; i <= N; i++)
+    {
+        if (i % 3 == 0)
+        {
+            if (dp[i] > dp[i / 3] + 1)
+            {
+                dp[i] = dp[i / 3] + 1;
+                before[i] = i / 3;
+            }
+        }
+        if (i % 2 == 0)
+        {
+            if (dp[i] > dp[i / 2] + 1)
+            {
+                dp[i] = dp[i / 2] + 1;
+                before[i] = i / 2;
+            }
+        }
+        if (dp[i] > dp[i - 1] + 1)
+        {
+            dp[i] = dp[i - 1] + 1;
+            before[i] = i - 1;
+        }
+    }
+
     cout << dp[N] << '\n';
     int cur = N;
     while (true)
@@ -32,39 +54,4 @@ void PrintResult()
             break;
         cur = before[cur];
     }
-}
-
-void DP()
-{
-    for (int i = 2; i <= N; i++)
-    {
-        if (i % 3 == 0 && dp[i] > dp[i / 3] + 1)
-        {
-            dp[i] = dp[i / 3] + 1;
-            before[i] = i / 3;
-        }
-        if (i % 2 == 0 && dp[i] > dp[i / 2] + 1)
-        {
-            dp[i] = dp[i / 2] + 1;
-            before[i] = i / 2;
-        }
-        if (dp[i] > dp[i - 1] + 1)
-        {
-            dp[i] = dp[i - 1] + 1;
-            before[i] = i - 1;
-        }
-    }
-}
-
-int main()
-{
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
-
-    GetInput();
-
-    Initialize();
-
-    DP();
-
-    PrintResult();
 }

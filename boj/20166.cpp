@@ -51,8 +51,8 @@ void bfs(int y, int x)
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
     cin >> N >> M >> K;
 
@@ -71,3 +71,10 @@ int main()
         cout << m[godLoves] << '\n';
     }
 }
+
+/*
+10 * 10 * (8^5) ~= 300만이라 다 해봐도 된다.
+다만 쿼리가 1000개까지 들어오므로 매번 다 해보면
+시간 초과가 난다. map에 처음 할 때의 결과를 저장해서
+바로바로 출력해주면 된다.
+*/

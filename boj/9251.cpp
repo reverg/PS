@@ -23,8 +23,17 @@ int LCS(string s1, string s2)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
     string s1, s2;
     cin >> s1 >> s2;
     cout << LCS(s1, s2);
 }
+
+/*
+seq[i][j] = s1의 i번째, s2의 j번째 글자까지 봤을 때 LCS 길이
+글자가 같으면 직전까지의 LCS 길이에 +1, 다르면 s1의 1글자 전과
+s2의 1글자 전 LCS 길이 중 긴 것 선택. 계단식으로 채워지므로
+이전의 모든 경우를 자동적으로 확인하게 되어 최대임이 보장된다.
+*/

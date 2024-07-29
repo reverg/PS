@@ -51,7 +51,8 @@ int bitonic(int n)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
     int n;
     cin >> n;
@@ -59,3 +60,9 @@ int main()
         cin >> num[i];
     cout << bitonic(n);
 }
+
+/*
+각 원소별로 LIS와 LDS(?)의 길이를 구하고 합이 가장 큰 것을
+고르면 된다. 선택한 원소가 중복돼서 들어가므로 1 빼야 한다.
+O(N^2) LIS 사용해도 1000개밖에 안돼서 시간 충분.
+*/

@@ -14,6 +14,10 @@ if __name__ == "__main__":
     N = int(input())
     seq = list(map(int, input().split()))
     dp = [1] * N  # size of biggest decreasing subsequence
-    
+
     subsequence(N)
     print(max(dp))
+
+"""
+#11053 뒤집으면 된다.
+"""

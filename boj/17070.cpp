@@ -6,18 +6,6 @@ using namespace std;
 int N;
 int room[16][16];
 
-void input()
-{
-    cin >> N;
-    for (int j = 0; j < N; j++)
-    {
-        for (int i = 0; i < N; i++)
-        {
-            cin >> room[j][i];
-        }
-    }
-}
-
 int movePipe()
 {
     int dp[N][N][3];
@@ -51,11 +39,13 @@ int movePipe()
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
-    input();
+    cin >> N;
+    for (int j = 0; j < N; j++)
+        for (int i = 0; i < N; i++)
+            cin >> room[j][i];
 
     cout << movePipe() << endl;
 }

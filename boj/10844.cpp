@@ -2,6 +2,7 @@
 
 using namespace std;
 
+const int MOD = 1000000000;
 long long stair[101][10];
 
 int count_stair(int n)
@@ -16,16 +17,17 @@ int count_stair(int n)
         stair[i][0] = stair[i - 1][1];
         stair[i][9] = stair[i - 1][8];
         for (int j = 1; j <= 8; j++)
-            stair[i][j] = (stair[i - 1][j - 1] + stair[i - 1][j + 1]) % 1000000000;
+            stair[i][j] = (stair[i - 1][j - 1] + stair[i - 1][j + 1]) % MOD;
     }
     for (int i = 0; i <= 9; i++)
         sum += stair[n][i];
-    return sum % 1000000000;
+    return sum % MOD;
 }
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
     int n;
     cin >> n;

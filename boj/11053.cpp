@@ -28,11 +28,19 @@ int subsequence(int n)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
     int n;
     cin >> n;
     for (int i = 1; i <= n; i++)
         cin >> num[i];
-    cout << subsequence(n);
+    cout << subsequence(n) << '\n';
 }
+
+/*
+LIS의 O(N^2) 알고리즘. DP로 현재 위치를 포함하는 가장 긴 부분수열을
+구하고, 처음부터 끝까지 한번 확인해 그 중 가장 긴 길이를 얻는다.
+자신을 포함하는 가장 긴 부분수열의 길이는 앞에 나온 수들 중 자기보다
+작은 수들의 부분수열 길이를 확인해 그 중 가장 긴 것의 길이 + 1로 구한다.
+*/

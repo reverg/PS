@@ -29,3 +29,9 @@ int main()
         cout << solve(N) << '\n';
     }
 }
+
+/*
+0 <= N <= 10^12라 배열을 만들기는 너무 크다.
+set을 사용해서 top-down으로 처리해주면 된다.
+10^12 ~= 2^40이라 recursion depth는 무리가 없는 수준.
+*/

@@ -1,44 +1,44 @@
 #include <iostream>
-#include <cstring>
 
 using namespace std;
 
+int N, M, S, E;
 int seq[2001] = {0};
-int palindrome[2001][2001] = {0};
-
-int isPalindrome(int i, int j)
-{
-    if (palindrome[i][j] == -1)
-    {
-        if (i + 1 < j)
-            palindrome[i][j] = (seq[i] == seq[j]) && isPalindrome(i + 1, j - 1);
-        else if (i == j)
-            palindrome[i][j] = 1;
-        else if (i + 1 == j)
-            palindrome[i][j] = (seq[i] == seq[j]);
-    }
-
-    return palindrome[i][j];
-}
+bool palindrome[2001][2001] = {false};
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
 
-    int n;
-    cin >> n;
+    cin >> N;
 
-    memset(palindrome, -1, sizeof(palindrome));
-    for (int i = 1; i <= n; i++)
-    {
+    for (int i = 1; i <= N; i++)
         cin >> seq[i];
+
+    // 길이 1: palindrome
+    for (int i = 1; i <= N; i++)
+        palindrome[i][i] = true;
+
+    // 길이 2: 2개 같으면 palindrome
+    for (int i = 1; i <= N - 1; i++)
+        palindrome[i][i + 1] = (seq[i] == seq[i + 1]);
+
+    // 길이 3 이상: 양쪽 끝 똑같고 안쪽 palindrome이면 palindrome
+    for (int l = 3; l <= N; l++)
+    {
+        for (int s = 1; s + l - 1 <= N; s++)
+        {
+            if (palindrome[s + 1][s + l - 2] && (seq[s] == seq[s + l - 1]))
+                palindrome[s][s + l - 1] = true;
+        }
     }
 
-    int m, s, e;
-    cin >> m;
-    for (int j = 0; j < m; j++)
+    cin >> M;
+    for (int j = 0; j < M; j++)
     {
-        cin >> s >> e;
-        cout << isPalindrome(s, e) << '\n';
+        cin >> S >> E;
+        cout << palindrome[S][E] << '\n';
     }
 }

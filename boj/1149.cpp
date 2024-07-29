@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -15,15 +16,15 @@ int coloring(int n)
         cost[i][1] = rgb[i][1] + min(cost[i - 1][0], cost[i - 1][2]);
         cost[i][2] = rgb[i][2] + min(cost[i - 1][0], cost[i - 1][1]);
 
-        min_cost = min(cost[i][0], cost[i][1]);
-        min_cost = min(min_cost, cost[i][2]);
+        min_cost = min({cost[i][0], cost[i][1], cost[i][2]});
     }
     return min_cost;
 }
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
     int n;
     cin >> n;

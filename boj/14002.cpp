@@ -53,7 +53,8 @@ void subsequence(int n)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
     int n;
     cin >> n;
@@ -61,3 +62,9 @@ int main()
         cin >> num[i];
     subsequence(n);
 }
+
+/*
+dp 배열을 보고 역추적 하는 방식으로 구현해놨는데, 점화식에서
+dp 값이 갱신될 때 값을 어디서 가져왔는지를 따로 저장해놨다가
+마지막에 쭉 출력해줘도 된다. 범위가 작아서 O(N^2)로 가능.
+*/

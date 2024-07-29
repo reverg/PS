@@ -1,7 +1,12 @@
 #include <iostream>
 
+using namespace std;
+
 int main()
 {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
     int fibo[41][2] = {0};
     fibo[0][0] = 1;
     fibo[0][1] = 0;
@@ -14,11 +19,11 @@ int main()
     }
 
     int T = 0;
-    std::cin >> T;
+    cin >> T;
     for (int i = 0; i < T; i++)
     {
         int N = 0;
-        std::cin >> N;
-        std::cout << fibo[N][0] << ' ' << fibo[N][1] << std::endl;
+        cin >> N;
+        cout << fibo[N][0] << ' ' << fibo[N][1] << '\n';
     }
 }

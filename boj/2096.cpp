@@ -7,20 +7,6 @@ int N;
 int board[100000][3];
 int max_path[3], min_path[3], tmp[3];
 
-void input()
-{
-    cin >> N;
-    for (int i = 0; i < N; i++)
-    {
-        cin >> board[i][0] >> board[i][1] >> board[i][2];
-    }
-    for (int j = 0; j < 3; j++)
-    {
-        max_path[j] = board[0][j];
-        min_path[j] = board[0][j];
-    }
-}
-
 void dp()
 {
     for (int i = 1; i < N; i++)
@@ -43,10 +29,18 @@ void dp()
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
-    input();
+    cin >> N;
+    for (int i = 0; i < N; i++)
+        cin >> board[i][0] >> board[i][1] >> board[i][2];
+    for (int j = 0; j < 3; j++)
+        max_path[j] = min_path[j] = board[0][j];
+
     dp();
 }
+
+/*
+N*3 배열로 만들면 낭비되는 메모리가 굉장히 많다. 직전 1줄만 있어도 충분.
+*/

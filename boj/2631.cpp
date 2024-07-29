@@ -20,9 +20,8 @@ int main()
         for (int j = 0; j < i; j++)
         {
             if (v[i] > v[j])
-            {
                 max_n = max(max_n, dp[j] + 1);
-            }
+
             dp[i] = max_n;
             ans = max(ans, dp[i]);
         }
@@ -30,3 +29,7 @@ int main()
 
     cout << N - ans << '\n';
 }
+
+/*
+LIS. 200명이라 O(N^2)로 충분.
+*/

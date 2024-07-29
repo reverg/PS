@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 int main()
@@ -20,3 +21,7 @@ int main()
     cout << NcK[N][K];
     return 0;
 }
+
+/*
+nCr = nC(r-1) + (n-1)C(r-1)
+*/

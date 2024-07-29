@@ -19,8 +19,8 @@ void dfs(int x)
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
     cin >> N >> M;
     for (int i = 1; i <= N; i++)
@@ -42,3 +42,8 @@ int main()
     for (int i = 1; i <= N; i++)
         cout << score[i] << ' ';
 }
+
+/*
+tree를 만들고 dfs로 순회하면서 직속 상사의 칭찬 수치를
+받아와 자신의 칭찬 수치에 더해주면 된다.
+*/
