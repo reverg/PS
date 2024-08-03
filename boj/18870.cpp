@@ -8,8 +8,8 @@ void merge(int arr[], int left, int mid, int right)
     int j = mid + 1;
 
     int sorted[right - left + 1];
-    for(int i=0; i<right-left+1; i++)
-        sorted[i]=2147483647;
+    for (int i = 0; i < right - left + 1; i++)
+        sorted[i] = 2147483647;
     int k = 0;
 
     while (i <= mid && j <= right)

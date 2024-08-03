@@ -26,3 +26,9 @@ for length in range(2, N + 1):
     dp = tmp
 
 print(sum(dp[i][FULLMASK] for i in range(10)) % MOD)
+
+"""
+쉬운 계단 수(#10844)에 비트마스킹을 추가한 버전.
+점화식은 #10844와 비슷하고, 0부터 9까지 모두 썼는지만 추가로
+확인해주면 되는 문제다.
+"""

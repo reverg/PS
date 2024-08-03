@@ -31,3 +31,9 @@ if __name__ == "__main__":
                 ans += sum_cnt[-v]
 
     print(ans)
+
+"""
+meet in the middle + hash map.
+A+B와 C+D로 나누고 map에 넣어도 되고,
+투 포인터로 같은 것 세줘도 된다.
+"""

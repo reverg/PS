@@ -26,7 +26,8 @@ long long mergeChapter(int k)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
     int n, k;
     cin >> n;
@@ -42,3 +43,7 @@ int main()
         cout << mergeChapter(k) << '\n';
     }
 }
+
+/*
+#11066 행렬 합치기와 유사.
+*/

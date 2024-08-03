@@ -32,3 +32,11 @@ if __name__ == "__main__":
                 dp[end] = min(dp[end], dp[end - 1] + 1)
 
     print(dp[L - 1])
+
+
+"""
+palindrome을 구하는건 #10942와 동일.
+부분 palindrome의 개수는 bottom-up으로 구하면 된다.
+start~end까지가 palindrome이면 start 이전 개수 + 1,
+아니면 직전 end - 1까지 개수에 마지막 end 1개짜리 추가.
+"""

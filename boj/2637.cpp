@@ -52,3 +52,7 @@ int main()
     for (auto bp : base_parts)
         cout << bp << ' ' << requirements[bp] << '\n';
 }
+
+/*
+완제품에서 기본 부품으로 위상정렬해서 하향식 dp.
+*/

@@ -9,9 +9,9 @@ int dist[301][301][301];
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
 
     int N, Q;
     cin >> N >> Q;
@@ -38,3 +38,9 @@ int main()
         cout << ((dist[s][e][c - 1] != INF) ? dist[s][e][c - 1] : -1) << '\n';
     }
 }
+
+/*
+최대 물방울이 C 이하로 가는 최단거리
+= 최대 물방울이 C-1인 지점을 거쳐가는 거리와 직행으로 가는 거리 중 작은 값
+mid 값을 늘려가면서 계산하므로 필요한 값은 이전에 계산되어 있다.
+*/

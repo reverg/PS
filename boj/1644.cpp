@@ -1,12 +1,14 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-int arr[4000000];
+vector<int> v;
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
     int n;
     cin >> n;
@@ -24,27 +26,26 @@ int main()
                 break;
             }
         }
-        if (isPrime)
-        {
-            arr[cnt++] = i;
-            sum += i;
-        }
-    }
 
-    sum = arr[0];
+        if (isPrime)
+            v.push_back(i);
+    }
+    v.push_back(0);
+
+    sum = v[0];
     cnt = 0;
 
     int front = 0, back = 0;
-    while (arr[back] != 0)
+    while (v[back] != 0)
     {
         if (sum > n)
-            sum -= arr[front++];
+            sum -= v[front++];
         else if (sum < n)
-            sum += arr[++back];
+            sum += v[++back];
         else
         {
             cnt++;
-            sum -= arr[front++];
+            sum -= v[front++];
         }
     }
 

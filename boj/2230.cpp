@@ -41,3 +41,8 @@ int main()
 
     cout << ans << '\n';
 }
+
+/*
+투 포인터.
+right, left가 0부터 N까지 가므로 O(2N)에 해결된다.
+*/

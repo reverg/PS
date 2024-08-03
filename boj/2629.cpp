@@ -18,6 +18,7 @@ void getWeight(int n)
             tmp.push_back(it + weight[i]);
             tmp.push_back(it - weight[i]);
         }
+
         for (auto it : tmp)
             constructed.insert(it);
     }
@@ -25,7 +26,9 @@ void getWeight(int n)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
     int n;
     cin >> n;
 
@@ -47,3 +50,9 @@ int main()
             cout << "N ";
     }
 }
+
+/*
+각각의 추에 대해 오른쪽에 올리기 / 왼쪽에 올리기 / 올리지 않기.
+지금 코드는 따로 0 미만의 값을 없애지 않아 음수도 들어가지만,
+어차피 왼쪽 오른쪽 뒤집으면 절대값은 같게 나와서 상관 없다.
+*/

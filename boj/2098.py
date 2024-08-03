@@ -31,3 +31,11 @@ def DFS(cur, visited):
     return min_dist
 
 print(DFS(0, 1))  # start at city #0
+
+"""
+Traveling Salesman Problem. 방문 정보를 bitmask로 가지고,
+현재 도착한 노드와 방문 정보를 이용해 dp를 쓰면 된다.
+모두 방문했을 때 처음 출발한 0번 도시로 갈 수 없으면 INF,
+있으면 최종점에서 0번 도시까지의 거리를 합산한다.
+순회하는 경로이므로 출발은 임의의 번호에서 해도 무방하다.
+"""

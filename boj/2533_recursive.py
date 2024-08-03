@@ -1,6 +1,5 @@
 # memory over on pypy3
 # use python3 to pass: 314060KB, 6176ms
-
 import sys
 
 sys.setrecursionlimit(1000000)

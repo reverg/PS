@@ -27,16 +27,22 @@ int mulMin(int n)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
     int n, r, c;
     cin >> n;
 
-    v.emplace_back(make_pair(0, 0));
+    v.emplace_back(0, 0);
     for (int i = 1; i <= n; i++)
     {
         cin >> r >> c;
-        v.emplace_back(make_pair(r, c));
+        v.emplace_back(r, c);
     }
     cout << mulMin(n);
 }
+
+/*
+모든 경우의 수를 따지면 너무 많음. 행렬 i부터 j까지
+구간을 나눠서 DP로 연산량 줄일 수 있음
+*/

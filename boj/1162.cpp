@@ -4,10 +4,11 @@
 
 using namespace std;
 typedef long long ll;
+typedef tuple<ll, int, int> tlii;
 
 vector<pair<int, ll>> graph[10001];
 ll dist[10001][21];
-priority_queue<tuple<ll, int, int>> pq;
+priority_queue<tlii, vector<tlii>, greater<tlii>> pq;
 
 int main()
 {
@@ -37,9 +38,9 @@ int main()
     ll ans = -1;
     while (!pq.empty())
     {
-        ll cur_time = -get<0>(pq.top());
-        int cur_node = get<1>(pq.top());
-        int cur_k = get<2>(pq.top());
+        ll cur_time;
+        int cur_node, cur_k;
+        tie(cur_time, cur_node, cur_k) = pq.top();
         pq.pop();
 
         if (cur_node == N)
@@ -60,16 +61,22 @@ int main()
             if (dist[next_node][cur_k] > next_time)
             {
                 dist[next_node][cur_k] = next_time;
-                pq.push({-next_time, next_node, cur_k});
+                pq.push({next_time, next_node, cur_k});
             }
 
             if (cur_k < K && dist[next_node][cur_k + 1] > cur_time)
             {
                 dist[next_node][cur_k + 1] = cur_time;
-                pq.push({-cur_time, next_node, cur_k + 1});
+                pq.push({cur_time, next_node, cur_k + 1});
             }
         }
     }
 
     cout << ans << '\n';
 }
+
+/*
+포장한 도로의 개수를 같이 넣는 다익스트라.
+priority_queue에서 시간이 가장 짧은 것을 계속 뽑아주니까
+포장한 개수에 상관 없이 최단 시간을 구해준다.
+*/

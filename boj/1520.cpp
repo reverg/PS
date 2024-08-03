@@ -7,7 +7,6 @@ int height[502][502] = {0};
 
 int downCourse(int i, int j)
 {
-
     if (route[i][j] == -1)
     {
         route[i][j] = 0;
@@ -25,7 +24,8 @@ int downCourse(int i, int j)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
     int m, n;
     cin >> m >> n;
@@ -43,5 +43,10 @@ int main()
     route[0][1] = 1;
 
     cout << downCourse(m, n) << '\n';
-
 }
+
+/*
+DFS + DP. O(MN)으로 끝난다. 높이 순으로 우선 순위 큐에 넣고
+BFS를 써도 되긴 하지만, 정렬 과정이 있어서 시간복잡도가
+O(MNlog(MN))으로 안 좋다.
+*/
