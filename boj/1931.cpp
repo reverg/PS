@@ -8,7 +8,10 @@ vector<pair<int, int>> meeting;
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
     int n;
     cin >> n;
     int str, fin;
@@ -34,3 +37,8 @@ int main()
 
     cout << ans;
 }
+
+/*
+유명한 그리디 문제. 회의가 일찍 끝나는 순서로 정렬해야 한다.
+증명은 https://www.youtube.com/watch?v=vw4gqeM4UGs 참고.
+*/

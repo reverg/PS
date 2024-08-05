@@ -11,7 +11,9 @@ priority_queue<int, vector<int>, greater<int>> min_pq;
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     cin >> N;
 
@@ -35,3 +37,10 @@ int main()
         cout << max_pq.top() << '\n';
     }
 }
+
+
+/*
+원소의 작은 쪽 절반은 max_heap, 큰 쪽 절반은 min_pq에 저장.
+개수가 잘 맞게 양쪽에 번갈아가면서 넣고, 순서가 안 맞으면
+양쪽의 top을 빼서 바꿔 넣으면 된다.
+*/

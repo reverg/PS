@@ -59,12 +59,16 @@ int main()
             candidates.push_back(i);
         }
         else if (min_score == score)
-        {
             candidates.push_back(i);
-        }
     }
 
     cout << min_score << ' ' << candidates.size() << '\n';
     for (int i = 0; i < candidates.size(); i++)
         cout << candidates[i] << ' ';
 }
+
+/*
+각각의 회원으로부터 bfs를 해서 최대 거리를 찾으면 된다.
+최대 거리를 따로 저장해뒀다가 가장 작은 회원들을 모아서 출력.
+회원 수가 50명 이하라 bfs 50번 해도 시간이 넉넉하다.
+*/

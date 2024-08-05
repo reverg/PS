@@ -52,3 +52,9 @@ int main()
         }
     }
 }
+
+/*
+3번 operation이 핵심. 배열을 쓰면 다음 명소를 찾는데 O(N)이지만,
+set을 써서 lower_bound로 찾으면 O(logN)으로 해결된다. erase와
+insert도 모두 O(logN)으로 해결되므로 구역과 쿼리가 많아도 괜찮다.ㄴ
+*/

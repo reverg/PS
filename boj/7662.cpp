@@ -1,47 +1,48 @@
 #include <iostream>
 #include <set>
 
+using namespace std;
+
 int main()
 {
-    std::ios_base::sync_with_stdio(0);
-    std::cin.tie(0), std::cout.tie(0);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
     int t;
-    std::cin >> t;
+    cin >> t;
 
     int k;
     char op;
     int elem;
     while (t--)
     {
-        std::cin >> k;
-        std::multiset<int> ms;
+        cin >> k;
+        multiset<int> ms;
         while (k--)
         {
-            std::cin >> op >> elem;
+            cin >> op >> elem;
             if (op == 'I')
-            {
                 ms.insert(elem);
-            }
-            else if (op == 'D' && !ms.empty())
+            else if (op == 'D')
             {
+                if (ms.empty())
+                    continue;
+
                 if (elem < 0)
-                {
                     ms.erase(ms.begin());
-                }
                 else
-                {
-                    auto iter = ms.end();
-                    ms.erase(--iter);
-                }
+                    ms.erase(prev(ms.end()));
             }
         }
+
         if (ms.empty())
-            std::cout << "EMPTY\n";
+            cout << "EMPTY\n";
         else
-        {
-            auto end_iter = ms.end();
-            std::cout << *(--end_iter) << ' ' << *ms.begin() << '\n';
-        }
+            cout << *prev(ms.end()) << ' ' << *ms.begin() << '\n';
     }
 }
+
+/*
+multiset을 사용하는 문제. 원소로 erase하면 똑같은거 다 지워지므로
+find 등을 써서 iterator를 인자로 넘겨야 한다.
+*/
