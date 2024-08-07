@@ -2,9 +2,12 @@
 #include <vector>
 #include <algorithm>
 
-#define INF 1e9
-
 using namespace std;
+
+const int INF = 0x3f3f3f3f;
+int N, M, Q;
+vector<pair<int, int>> bulldog;
+int wait[501][501];
 
 int main()
 {
@@ -12,11 +15,8 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int N, M, Q;
     cin >> N >> M >> Q;
 
-    vector<pair<int, int>> bulldog;
-    int wait[501][501];
     for (int i = 1; i <= N; i++)
     {
         int d;
@@ -59,7 +59,7 @@ int main()
 
                 int newDist = dist[from][mNode] + dist[mNode][to];
                 int newWait = max(mWait, wait[from][to]);
-                if (dist[from][to] + wait[from][to] > newDist + newWait)
+                if (dist[from][to] + wait[from][to] > newDist + mWait)
                 {
                     dist[from][to] = newDist;
                     wait[from][to] = newWait;
@@ -76,3 +76,15 @@ int main()
         cout << (total_time < INF ? total_time : -1) << '\n';
     }
 }
+
+/*
+#23258의 강화판인 플로이드-와셜 문제.
+가장 바깥 루프에서 선택하는 정점이 경로에 사용 가능하도록 추가되는 점임을
+명심하자. 개가 오랫동안 괴롭힐 수 있는 순서로 정렬하고 경로를 갱신하면
+자동적으로 개가 가장 오랫동안 괴롭힐 수 있는 지점에서 대기하게 된다.
+정렬하지 않고 갱신하면 괴롭힐 수 있는 시간이 짧은 지점에서 기다릴 때
+총 시간이 가장 긴 tc에서 오답이 나온다.
+61행에서 newWait를 계산한 것은 경유하는 지점 뿐만 아니라 시작점과 끝점에서도
+개가 대기할 수 있기 때문이다. 알고리즘이 경유점 기준으로 거리를 갱신하므로
+시작점과 끝점은 따로 고려가 필요하다.
+*/

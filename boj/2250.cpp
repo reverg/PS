@@ -27,6 +27,9 @@ void inorder(int cur, int depth)
 
 int main()
 {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
     cin >> N;
     for (int i = 0; i < N; i++)
     {
@@ -66,3 +69,11 @@ int main()
 
     cout << ans_level << ' ' << ans_width << '\n';
 }
+
+/*
+inorder 순회시 도착 순서가 x좌표, level이 y좌표다.
+level별 최소/최대 좌표를 treeStat[depth]에 저장하고
+둘의 차이가 가장 큰 level을 찾았다. 최대 좌표가 기록
+안 되어있으면 너비는 1임에 유의. 트리 순회를 1번하므로
+O(V+E) 시간에 풀린다. level 구하는 부분은 V보다 적다.
+*/

@@ -57,7 +57,7 @@ int main()
             min_score = score;
             candidates.clear();
             candidates.push_back(i);
-        }
+        } 
         else if (min_score == score)
             candidates.push_back(i);
     }

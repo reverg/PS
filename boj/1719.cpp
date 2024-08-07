@@ -1,15 +1,19 @@
 #include <iostream>
 
-#define INF 1e9
-
 using namespace std;
+
+const int INF = 0x3f3f3f3f;
+int N, M;
+int dist[201][201];
+int route[201][201];
 
 int main()
 {
-    int N, M;
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
     cin >> N >> M;
 
-    int dist[201][201] = {0};
     for (int i = 1; i <= N; i++)
         for (int j = 1; j <= N; j++)
             dist[i][j] = (i == j ? 0 : INF);
@@ -22,7 +26,6 @@ int main()
         dist[to][from] = cost;
     }
 
-    int route[201][201];
     for (int i = 1; i <= N; i++)
         for (int j = 1; j <= N; j++)
             route[i][j] = j;
@@ -57,3 +60,7 @@ int main()
             cout << route[i][N] << '\n';
     }
 }
+
+/*
+#11780과 동일.
+*/

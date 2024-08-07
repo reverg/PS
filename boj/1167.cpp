@@ -28,7 +28,9 @@ void dfs(int start, int dist)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     cin >> v;
     int x, y, dist;
@@ -54,3 +56,7 @@ int main()
 
     cout << max_dist;
 }
+
+/*
+#1967과 동일. 트리의 크기만 다르다.
+*/

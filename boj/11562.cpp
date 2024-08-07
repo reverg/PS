@@ -1,18 +1,20 @@
 #include <iostream>
 
-#define INF 1e9
-
 using namespace std;
+
+const int INF = 0x3f3f3f3f;
+int N, M, K;
+int dist[251][251];
 
 int main()
 {
-    int N, M, K;
     cin >> N >> M;
 
-    int dist[251][251];
     for (int i = 1; i <= N; i++)
-        for (int j = 1; j <= N; j++)
-            dist[i][j] = (i == j ? 0 : INF);
+    {
+        fill(dist[i], dist[i] + N + 1, INF);
+        dist[i][i] = 0;
+    }
 
     for (int i = 0; i < M; i++)
     {
@@ -35,3 +37,10 @@ int main()
         cout << dist[u][v] << '\n';
     }
 }
+
+/*
+갈 수 있는 간선은 비용 0, 단방향이라 있어도 못 가는 간선은
+비용 1 취급한다. 플로이드를 쓰면 양방향으로 바꿔야 되는
+간선 수는 dist 값과 동일해진다. 조건상 모든 길을 양방향으로
+바꿔도 서로 도달 불가능한 건물들은 없으므로 INF 값이 남아있지 않다.
+*/

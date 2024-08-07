@@ -33,3 +33,7 @@ for _ in range(T):
 
     trg = int(input())
     print(time_dp[trg])
+
+"""
+#2056과 사실상 동일.
+"""

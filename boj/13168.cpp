@@ -2,17 +2,20 @@
 #include <unordered_map>
 #include <vector>
 
-#define INF 1e9
-
 using namespace std;
+
+const int INF = 0x3f3f3f3f;
+
+int N, R, M, K;
+vector<int> tourList;
+double naeilo[100][100];
+double ilban[100][100];
 unordered_map<string, int> cityCode;
 
 int main()
 {
-    int N, R, M, K;
-    vector<int> tourList;
-    double naeilo[100][100] = {0};
-    double ilban[100][100] = {0};
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
     // map string to int: city name -> city code
     cin >> N >> R;
@@ -34,15 +37,12 @@ int main()
     cin >> K;
     for (int i = 0; i < N; i++)
     {
-        for (int j = 0; j < N; j++)
-        {
-            if (i != j)
-            {
-                naeilo[i][j] = INF;
-                ilban[i][j] = INF;
-            }
-        }
+        fill(naeilo[i], naeilo[i] + N, INF);
+        fill(ilban[i], ilban[i] + N, INF);
+        naeilo[i][i] = 0;
+        ilban[i][i] = 0;
     }
+
     for (int i = 0; i < K; i++)
     {
         string type, start, end;
@@ -94,3 +94,8 @@ int main()
 
     cout << (ilban_cost > naeilo_cost ? "Yes" : "No") << '\n';
 }
+
+/*
+내일로 살 때와 안 살 때 금액을 분리해서 따로 플로이드 쓰면 된다.
+여행 경로 따라 금액 확인한 뒤 싼지 안싼지 비교해서 싼 것 출력.
+*/

@@ -38,3 +38,7 @@ if __name__ == "__main__":
             last_edge_cost = cost
 
     print(cost_sum - last_edge_cost)
+
+"""
+평범한 크루스칼 알고리즘.
+"""

@@ -20,7 +20,9 @@ int getParent(int node)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     cin >> N;
 
@@ -33,17 +35,11 @@ int main()
         coord[2].emplace_back(make_pair(z, i));
     }
 
-    // corner case
-    if (N <= 1)
-    {
-        cout << 0;
-        return 0;
-    }
-
     sort(coord[0].begin(), coord[0].end());
     sort(coord[1].begin(), coord[1].end());
     sort(coord[2].begin(), coord[2].end());
 
+    // edge에 인접한 행성들의 정보만 저장
     for (int j = 0; j < 3; j++)
     {
         for (int i = 0; i < N - 1; i++)
@@ -81,6 +77,6 @@ int main()
 /*
 크루스칼 알고리즘.
 모든 간선의 정보를 저장하면 최악의 경우 50억개 저장해야 한다.
-가까운 행성을 놔두고 먼 행성과 연결하는 경우는 없으므로 x, y, z 좌표에 대해 인접한 행성들만 고려해주면 된다.
+가까운 행성을 놔두고 먼 행성과 연결할 일은 없으므로 x, y, z 좌표에 대해 인접한 행성들만 고려해주면 된다.
 x, y, z 좌표를 따로 저장해 정렬해두고 이웃하는 것들만 고려해 MST를 구축하면 정답이다.
 */

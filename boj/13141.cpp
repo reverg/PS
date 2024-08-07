@@ -1,9 +1,11 @@
 #include <iostream>
 #include <vector>
 
-#define INF 1e9
-
 using namespace std;
+
+const int INF = 0x3f3f3f3f;
+int N, M;
+vector<Edge> edges;
 
 struct Edge
 {
@@ -14,7 +16,6 @@ struct Edge
 
 int main()
 {
-    int N, M;
     cin >> N >> M;
 
     int dist[201][201];
@@ -22,7 +23,6 @@ int main()
         for (int j = 1; j <= 200; j++)
             dist[i][j] = (i == j ? 0 : INF);
 
-    vector<Edge> edges;
     for (int i = 0; i < M; i++)
     {
         int s, e, l;
@@ -49,3 +49,10 @@ int main()
 
     cout << min_ignite_time / 2 << '.' << (min_ignite_time % 2) * 5 << '\n';
 }
+
+/*
+어떤 간선을 다 태우고 싶으면 (불 붙인 곳 -> 시작점 -> 간선 -> 끝점 -> 불 붙인 곳)을
+다 돌고 오면 된다. 불이 양쪽에서 가므로 특정 간선을 태우는데 걸리는 시간은 이것의 절반.
+45행에서 가장 오랜 시간이 걸리는 간선을 태우려면 얼마나 걸리는지 확인하고, 그 절반을
+50행에서 출력한다.
+*/

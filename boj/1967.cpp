@@ -28,7 +28,9 @@ void dfs(int start, int dist)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     cin >> v;
     int x, y, dist;
@@ -48,3 +50,8 @@ int main()
 
     cout << max_dist;
 }
+
+/*
+DFS 2번 하면 된다. 첫 DFS때 루트에서 가장 먼 정점을 구하고,
+2번째 DFS때 해당 정점에서 가장 먼 정점의 거리를 구한다.
+*/

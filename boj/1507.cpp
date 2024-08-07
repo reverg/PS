@@ -2,17 +2,21 @@
 
 using namespace std;
 
+int N;
+int dist[20][20];
+bool canRemove[20][20] = {false};
+
 int main()
 {
-    int N;
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
     cin >> N;
 
-    int dist[20][20];
     for (int i = 0; i < N; i++)
         for (int j = 0; j < N; j++)
             cin >> dist[i][j];
 
-    bool canRemove[20][20] = {false};
     for (int mid = 0; mid < N; mid++)
     {
         for (int from = 0; from < N; from++)
@@ -26,9 +30,7 @@ int main()
                 }
 
                 if (from != mid && mid != to && (dist[from][mid] + dist[mid][to] == dist[from][to]))
-                {
                     canRemove[from][to] = true;
-                }
             }
         }
     }
@@ -39,3 +41,11 @@ int main()
             count += (canRemove[i][j] ? 0 : dist[i][j]);
     cout << count / 2 << '\n';
 }
+
+/*
+플로이드를 반대로 돌린다.
+어떤 도로가 다른 두 도로의 합으로 표현된다는 것은,
+그 도로를 없애도 지장이 없다는 뜻이다.
+22행처럼 최단경로가 덜 완성된건 불가능한 경우이다.
+양방향 간선에서 거리가 2배로 세지므로 마지막에 2로 나눠줬다.
+*/

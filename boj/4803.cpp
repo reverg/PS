@@ -19,20 +19,20 @@ void reset()
     }
 }
 
-bool dfs(int start, int prev)
+bool dfs(int cur, int par)
 {
     // cycle check
-    if (visited[start])
+    if (visited[cur])
         return false;
 
-    visited[start] = true;
+    visited[cur] = true;
 
-    for (int i = 0; i < graph[start].size(); i++)
+    for (int i = 0; i < graph[cur].size(); i++)
     {
-        if (graph[start][i] == prev) // prevent moving a <-> b
+        if (graph[cur][i] == par)
             continue;
 
-        if (dfs(graph[start][i], start) == false)
+        if (!dfs(graph[cur][i], cur))
             return false;
     }
     return true;
@@ -40,7 +40,9 @@ bool dfs(int start, int prev)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     int num = 1;
     while (true)

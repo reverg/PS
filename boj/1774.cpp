@@ -28,7 +28,9 @@ int getParent(int node)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     cin >> N >> M;
 
@@ -49,13 +51,6 @@ int main()
         cin >> x >> y;
         if (getParent(x) != getParent(y))
             parent[getParent(x)] = getParent(y);
-    }
-
-    // corner case
-    if (N <= 1)
-    {
-        cout << 0;
-        return 0;
     }
 
     // generate edges

@@ -37,7 +37,9 @@ void TopologySort(int N)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     int N, M;
     cin >> N >> M;
@@ -51,3 +53,9 @@ int main()
 
     TopologySort(N);
 }
+
+/*
+위상정렬에 쓰는 큐만 우선순위 큐로 바꿔주면 된다.
+pop하면 선행 문제가 없는 가장 쉬운 문제가 나오게 된다.
+우선순위 큐 쓰므로 O(V+E)이 아닌 O(VlogV+E).
+*/
