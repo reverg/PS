@@ -5,13 +5,16 @@
 using namespace std;
 using ll = long long;
 
+int N, M, K;
+ll dist[100001];
+priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<>> pq;
+
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int N, M, K;
     cin >> N >> M >> K;
 
     vector<pair<ll, int>> graph[100001];
@@ -22,11 +25,8 @@ int main()
         cin >> from >> to >> cost;
         graph[to].push_back({cost, from});
     }
-
-    ll dist[100001];
     fill(dist, dist + N + 1, 1e18);
 
-    priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<pair<ll, ll>>> pq;
     for (int i = 0; i < K; i++)
     {
         int city;
@@ -67,3 +67,7 @@ int main()
     cout << max_idx << '\n'
          << max_dist << '\n';
 }
+
+/*
+여러 점에서 시작하는 다익스트라 + 역방향 간선.
+*/

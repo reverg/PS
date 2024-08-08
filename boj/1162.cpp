@@ -6,6 +6,7 @@ using namespace std;
 typedef long long ll;
 typedef tuple<ll, int, int> tlii;
 
+int N, M, K;
 vector<pair<int, ll>> graph[10001];
 ll dist[10001][21];
 priority_queue<tlii, vector<tlii>, greater<tlii>> pq;
@@ -16,9 +17,8 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int N, M, K;
+    // get input
     cin >> N >> M >> K;
-
     for (int i = 0; i < M; i++)
     {
         int a, b;
@@ -27,11 +27,11 @@ int main()
         graph[a].push_back({b, cost});
         graph[b].push_back({a, cost});
     }
-
     for (int i = 1; i <= N; i++)
         for (int j = 0; j <= K; j++)
             dist[i][j] = 0x3f3f3f3f3f3f3f3fLL;
 
+    // dijkstra
     pq.push({0, 1, 0});
     dist[1][0] = 0;
 
@@ -76,7 +76,8 @@ int main()
 }
 
 /*
-포장한 도로의 개수를 같이 넣는 다익스트라.
-priority_queue에서 시간이 가장 짧은 것을 계속 뽑아주니까
-포장한 개수에 상관 없이 최단 시간을 구해준다.
+포장한 도로의 개수를 같이 넣는 다익스트라. 정점이
+(정점 번호)가 아니라 (정점번호, 남은 포장 횟수)라고 생각해도
+무방하다. priority_queue에서 시간이 가장 짧은 것을 계속
+뽑아주니까 포장한 개수에 상관 없이 최단 시간을 구해준다.
 */

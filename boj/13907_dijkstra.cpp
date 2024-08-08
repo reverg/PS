@@ -11,6 +11,7 @@ int N, M, K, S, D;
 vector<pair<int, int>> graph[1001];
 int tax[30001];
 int dist[1001][1001];
+priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<>> pq;
 
 void Dijkstra()
 {
@@ -19,18 +20,15 @@ void Dijkstra()
             dist[i][j] = INF;
     dist[S][0] = 0;
 
-    priority_queue<tuple<int, int, int>> pq;
     pq.push({0, S, 0});
     while (!pq.empty())
     {
-        int cur_dist = -get<0>(pq.top());
-        int cur_node = get<1>(pq.top());
-        int cur_roads = get<2>(pq.top());
+        auto [cur_dist, cur_node, cur_roads] = pq.top();
         pq.pop();
 
         if (cur_node == D)
             continue;
-        if (dist[cur_node][cur_roads] < cur_dist)
+        if (dist[cur_node][cur_roads] != cur_dist)
             continue;
 
         for (int i = 0; i < graph[cur_node].size(); i++)
@@ -41,7 +39,7 @@ void Dijkstra()
             if (dist[next_node][cur_roads + 1] > new_dist)
             {
                 dist[next_node][cur_roads + 1] = new_dist;
-                pq.push({-new_dist, next_node, cur_roads + 1});
+                pq.push({new_dist, next_node, cur_roads + 1});
             }
         }
     }
@@ -86,4 +84,6 @@ O(NMlogN + NK) 풀이. 거쳐간 도로의 개수를 같이 가지는 2차원 DP
 BFS를 사용한 풀이보다 속도 100배, 메모리 8배 정도 안 좋지만, 거쳐간 도로
 개수가 중요하단 것을 빠르게 못 깨달으면 이쪽이 더 직관적인 풀이같긴 하다.
 끝의 O(NK)도 BFS때와 달리 NK개 모두 확인해서 정말 느리다.
+벨만-포드를 쓰면 O(NM + NK)가 된다는 난이도 기여의 의견이 있다. 맙소사...
+BFS 풀이 또한 O(NM + NK)이므로 확인해 볼 것.
 */

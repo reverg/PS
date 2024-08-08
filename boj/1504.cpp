@@ -2,44 +2,38 @@
 #include <queue>
 #include <vector>
 
-#define INF 999999999
-
 using namespace std;
+
+const int INF = 0x3f3f3f3f;
 
 int N, E, v1, v2;
 int dist[20001];
 vector<pair<int, int>> edge[20001];
-priority_queue<pair<int, int>> pq;
-
-void updateDist(int cur_node, int cur_cost)
-{
-    for (int i = 0; i < edge[cur_node].size(); i++)
-    {
-        int next_dist = edge[cur_node][i].first;
-        int next_node = edge[cur_node][i].second;
-        if (dist[next_node] > cur_cost + next_dist)
-        {
-            dist[next_node] = cur_cost + next_dist;
-            pq.push(make_pair(-dist[next_node], next_node));
-        }
-    }
-}
+priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
 
 void dijkstra(int start)
 {
-    for (int i = 1; i <= N; i++)
-        dist[i] = INF;
-    pq.push(make_pair(0, start));
+    fill(dist, dist + N + 1, INF);
+
+    pq.push({0, start});
     dist[start] = 0;
 
     while (!pq.empty())
     {
-        int cur_cost = -pq.top().first;
+        int cur_cost = pq.top().first;
         int cur_node = pq.top().second;
-
         pq.pop();
 
-        updateDist(cur_node, cur_cost);
+        for (int i = 0; i < edge[cur_node].size(); i++)
+        {
+            int next_dist = edge[cur_node][i].first;
+            int next_node = edge[cur_node][i].second;
+            if (dist[next_node] > cur_cost + next_dist)
+            {
+                dist[next_node] = cur_cost + next_dist;
+                pq.push({dist[next_node], next_node});
+            }
+        }
     }
 }
 
@@ -53,7 +47,9 @@ int getDistSum(int route, int to)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     cin >> N >> E;
 
@@ -86,3 +82,8 @@ int main()
     else
         cout << min(route1, route2);
 }
+
+/*
+다익스트라를 3번 쓰는 문제. O(ElogE) 3번이라 충분하다.
+dist 합 구할 때 overflow 안 나게 유의해야 한다...
+*/

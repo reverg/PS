@@ -37,11 +37,11 @@ void bfs()
             int next_node = graph[cur_node][i].first;
             int new_dist = cur_dist + graph[cur_node][i].second;
 
-            if (dist[next_node] <= new_dist)
-                continue;
-
-            dist[next_node] = new_dist;
-            q.push({new_dist, next_node, cur_roads + 1});
+            if (dist[next_node] > new_dist)
+            {
+                dist[next_node] = new_dist;
+                q.push({new_dist, next_node, cur_roads + 1});
+            }
         }
     }
 }
@@ -71,7 +71,7 @@ int main()
     for (int k = 0; k <= K; k++)
     {
         int min_dist = INF;
-        for (auto &[dist, road_num]: road)
+        for (auto &[dist, road_num] : road)
         {
             dist += tax[k] * road_num;
             min_dist = min(min_dist, dist);
@@ -81,7 +81,7 @@ int main()
 }
 
 /*
-O(NM + NK) 풀이. 거쳐하는 도로 개수가 증가하는 순서로 탐색되므로
+O(NM + NK) 풀이. 거쳐가는 도로 개수가 증가하는 순서로 탐색되므로
 2차원 배열을 사용할 필요가 없다. 어차피 도로 개수가 늘어나면 세금을
 더 많이 내야 하기 때문. dist 배열이 갱신되는 것은 도로 개수가
 늘어났지만 시간은 감소한 경우이다. 목표 지점에 도착한 경우만 따로

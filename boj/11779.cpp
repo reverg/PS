@@ -3,62 +3,25 @@
 #include <vector>
 #include <stack>
 
-#define MAX 1001
-#define INF 999999999
-
 using namespace std;
+
+const int INF = 0x3f3f3f3f;
 
 int N, M;
 int start, fin;
-vector<pair<int, int>> edge[MAX];
-int dist[MAX];
-int before[MAX];
+vector<pair<int, int>> edge[1001];
+priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+int dist[1001];
+int before[1001];
 stack<int> route;
-
-void Input()
-{
-    cin >> N >> M;
-    int from, to, cost;
-    for (int i = 0; i < M; i++)
-    {
-        cin >> from >> to >> cost;
-        edge[from].push_back(make_pair(to, cost));
-    }
-    cin >> start >> fin;
-}
-
-void Initialize()
-{
-    for (int i = 1; i <= N; i++)
-        dist[i] = INF;
-    dist[start] = 0;
-}
-
-void Print()
-{
-    cout << dist[fin] << '\n';
-    int cur = fin;
-    while (cur)
-    {
-        route.push(cur);
-        cur = before[cur];
-    }
-    cout << route.size() << '\n';
-    while (!route.empty())
-    {
-        cout << route.top() << ' ';
-        route.pop();
-    }
-}
 
 void Dijkstra(int start, int fin)
 {
-    priority_queue<pair<int, int>> pq;
     pq.push(make_pair(0, start));
 
     while (!pq.empty())
     {
-        int cur_cost = -pq.top().first;
+        int cur_cost = pq.top().first;
         int cur_node = pq.top().second;
         pq.pop();
 
@@ -73,7 +36,7 @@ void Dijkstra(int start, int fin)
             {
                 dist[next_node] = cur_cost + next_dist;
                 before[next_node] = cur_node;
-                pq.push(make_pair(-dist[next_node], next_node));
+                pq.push({dist[next_node], next_node});
             }
         }
     }
@@ -81,10 +44,47 @@ void Dijkstra(int start, int fin)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
-    Input();
-    Initialize();
+    // get input
+    cin >> N >> M;
+    int from, to, cost;
+    for (int i = 0; i < M; i++)
+    {
+        cin >> from >> to >> cost;
+        edge[from].push_back({to, cost});
+    }
+    cin >> start >> fin;
+
+    fill(dist, dist + N + 1, INF);
+    dist[start] = 0;
+
+    // solve
     Dijkstra(start, fin);
-    Print();
+
+    // print answer
+    cout << dist[fin] << '\n';
+
+    int cur = fin;
+    while (cur)
+    {
+        route.push(cur);
+        cur = before[cur];
+    }
+    cout << route.size() << '\n';
+    while (!route.empty())
+    {
+        cout << route.top() << ' ';
+        route.pop();
+    }
+    cout << '\n';
 }
+
+/*
+다익스트라 + 경로 추적.
+새로운 간선을 우선순위 큐에 넣을 때 새로운 정점의
+직전 정점 정보를 같이 갱신해뒀다가 마지막에 도착점부터
+시작점까지 거꾸로 추적해서 출력한다.
+*/

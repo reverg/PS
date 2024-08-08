@@ -17,6 +17,7 @@ def dijkstra():
         cost, cy, cx = heapq.heappop(hq)
         if cy == N - 1 and cx == M - 1:
             return cost
+
         for i in range(4):
             ny = cy + dy[i]
             nx = cx + dx[i]
@@ -32,3 +33,10 @@ if __name__ == "__main__":
     dist = [[-1] * M for _ in range(N)]
 
     print(dijkstra())
+
+"""
+0-1 BFS. 벽을 안 부수고 갈 수 있는 곳을 모두 가고,
+벽 1개 부술 때마다 dist를 갱신한다. 벽을 안 부수는
+경로가 먼저 반영되므로 처음 목적지에 도착했을 때 해당
+부분 dist가 답이다.
+"""

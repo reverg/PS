@@ -12,10 +12,10 @@ vector<pair<int, int>> graph[200001];
 
 int pre[200001] = {0};
 bool used[200001] = {false};
+priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
 
 int dijkstra(int start, int end)
 {
-    priority_queue<pair<int, int>> pq;
     int dist[200001];
 
     fill(dist, dist + 200001, INF);
@@ -25,7 +25,6 @@ int dijkstra(int start, int end)
     while (!pq.empty())
     {
         auto [cur_dist, cur_node] = pq.top();
-        cur_dist *= -1;
         pq.pop();
 
         if (dist[cur_node] != cur_dist)
@@ -41,28 +40,27 @@ int dijkstra(int start, int end)
             {
                 pre[next_node] = cur_node;
                 dist[next_node] = ndist;
-                pq.push({-ndist, next_node});
+                pq.push({ndist, next_node});
             }
             else if (dist[next_node] == ndist)
-            {
-                pre[next_node] = min(pre[next_node], cur_node);
-            }
+                pre[next_node] = min(pre[next_node], cur_node); // 사전순 경로 선택
         }
     }
 
     return dist[end];
 }
 
-void remove_path()
+void remove_path(int start, int fin)
 {
-    int cur = S;
+    int cur = start;
     while (cur > 0)
     {
         used[cur] = true;
         cur = pre[cur];
     }
 
-    used[E] = false;
+    used[start] = false;
+    used[fin] = false;
 }
 
 int main()
@@ -87,10 +85,19 @@ int main()
     int ans = dijkstra(E, S);
 
     // remove shortest paths
-    remove_path();
+    remove_path(S, E);
 
     // Dijkstra 2
     ans += dijkstra(S, E);
 
     cout << ans << '\n';
 }
+
+/*
+사전순 경로 선택이 어렵다.
+시작->도착으로 다익스트라를 돌리고 역추적을 하면 경로를
+뒤에서 앞으로 생성하는 것이므로 사전순 정렬이 안된다.
+경로를 뒤집어서, 즉 도착->시작으로 다익스트라를 돌리면
+경로 역추적이 시작점에서 도착점 순서로 되므로 사전순 정렬이
+된 경로를 얻을 수 있다. 이 아이디어를 제외하면 #5719와 유사.
+*/

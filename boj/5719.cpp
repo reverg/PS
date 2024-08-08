@@ -9,18 +9,17 @@ using namespace std;
 
 int N, M, S, D;
 int graph[500][500];
+int dist[500];
+priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
 vector<int> prev_node[500];
 
-int dijkstra()
+void dijkstra()
 {
-    int dist[500];
     fill(dist, dist + N, INF);
     dist[S] = 0;
 
-    priority_queue<pair<int, int>> pq;
     pq.push({0, S});
 
-    vector<int> prev[N];
     while (!pq.empty())
     {
         int cur_dist = pq.top().first;
@@ -42,7 +41,7 @@ int dijkstra()
                 prev_node[next_node].clear();
                 prev_node[next_node].push_back(cur_node);
                 dist[next_node] = ndist;
-                pq.push({-ndist, next_node});
+                pq.push({ndist, next_node});
             }
             else if (dist[next_node] == ndist)
             {
@@ -50,12 +49,12 @@ int dijkstra()
             }
         }
     }
-
-    return dist[D];
 }
 
 void remove_path()
 {
+    // using prev node info,
+    // remove path by bfs
     queue<int> q;
     bool visited[500] = {false};
     visited[D] = true;
@@ -81,10 +80,15 @@ void remove_path()
 
 int main()
 {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
     vector<int> ans;
 
     while (true)
     {
+        // get input
         cin >> N >> M;
         if (N == 0 && M == 0)
             break;
@@ -110,14 +114,21 @@ int main()
         remove_path();
 
         // Dijkstra 2
-        int asd = dijkstra();
+        dijkstra();
+        int almost_shortest_distance = dist[D];
 
-        if (asd == 1e9)
+        // push answer
+        if (almost_shortest_distance == 1e9)
             ans.push_back(-1);
         else
-            ans.push_back(asd);
+            ans.push_back(almost_shortest_distance);
     }
 
     for (int i = 0; i < ans.size(); i++)
         cout << ans[i] << '\n';
 }
+
+/*
+다익스트라 + 경로 추적 + 역방향 BFS + 다익스트라.
+구현이 좀 성가시긴 한데 아이디어는 익숙한 것들이다.
+*/
