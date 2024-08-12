@@ -6,17 +6,12 @@ using namespace std;
 
 int M, N, H;
 int arr[100][100][100];
-int dist[100][100][100] = {0};
+int dist[100][100][100];
 queue<tuple<int, int, int>> q;
 
 int dx[6] = {1, -1, 0, 0, 0, 0};
 int dy[6] = {0, 0, 1, -1, 0, 0};
 int dz[6] = {0, 0, 0, 0, 1, -1};
-
-bool isInside(int x, int y, int z)
-{
-    return (0 <= x && x < M && 0 <= y && y < N && 0 <= z && z < H);
-}
 
 void bfs()
 {
@@ -33,22 +28,23 @@ void bfs()
             int ny = y + dy[k];
             int nz = z + dz[k];
 
-            if (isInside(nx, ny, nz))
-            {
-                if (arr[nx][ny][nz] == 0)
-                {
-                    dist[nx][ny][nz] = dist[x][y][z] + 1;
-                    arr[nx][ny][nz] = 1;
-                    q.push(make_tuple(nx, ny, nz));
-                }
-            }
+            if (0 > nx || nx >= M || 0 > ny || ny >= N || 0 > nz || nz >= H)
+                continue;
+            if (arr[nx][ny][nz] != 0)
+                continue;
+
+            dist[nx][ny][nz] = dist[x][y][z] + 1;
+            arr[nx][ny][nz] = 1;
+            q.push({nx, ny, nz});
         }
     }
 }
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     cin >> M >> N >> H;
 
@@ -58,10 +54,9 @@ int main()
         {
             for (int i = 0; i < M; i++)
             {
-
                 cin >> arr[i][j][k];
                 if (arr[i][j][k] == 1)
-                    q.push(make_tuple(i, j, k));
+                    q.push({i, j, k});
             }
         }
     }
@@ -85,5 +80,5 @@ int main()
         }
     }
 
-    cout << day;
+    cout << day << '\n';
 }

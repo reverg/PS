@@ -1,6 +1,8 @@
 #include <iostream>
 #include <queue>
 
+using namespace std;
+
 int N;
 char picture[100][101]; // one extra for '\0'
 bool visited[100][100] = {false};
@@ -9,9 +11,9 @@ int dx[4] = {1, -1, 0, 0};
 
 void BFS(int st_y, int st_x)
 {
-    std::queue<std::pair<int, int>> q;
+    queue<pair<int, int>> q;
     visited[st_y][st_x] = true;
-    q.push(std::make_pair(st_y, st_x));
+    q.push({st_y, st_x});
 
     while (!q.empty())
     {
@@ -23,12 +25,16 @@ void BFS(int st_y, int st_x)
         {
             int ny = y + dy[i];
             int nx = x + dx[i];
+
             if (ny < 0 || ny >= N || nx < 0 || nx >= N)
                 continue;
-            if (!visited[ny][nx] && picture[y][x] == picture[ny][nx])
+            if (visited[ny][nx])
+                continue;
+
+            if (picture[y][x] == picture[ny][nx])
             {
                 visited[ny][nx] = true;
-                q.push(std::make_pair(ny, nx));
+                q.push({ny, nx});
             }
         }
     }
@@ -36,12 +42,13 @@ void BFS(int st_y, int st_x)
 
 int main()
 {
-    std::ios_base::sync_with_stdio(0);
-    std::cin.tie(0), std::cout.tie(0);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
 
-    std::cin >> N;
+    cin >> N;
     for (int j = 0; j < N; j++)
-        std::cin >> picture[j];
+        cin >> picture[j];
 
     int human = 0;
     for (int j = 0; j < N; j++)
@@ -79,5 +86,5 @@ int main()
         }
     }
 
-    std::cout << human << ' ' << cow << '\n';
+    cout << human << ' ' << cow << '\n';
 }

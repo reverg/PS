@@ -11,6 +11,7 @@ int melt_ice(int board[300][300], int r, int c)
 {
     bool visited[300][300] = {false};
 
+    // melt ice
     int pieces = 0;
     vector<pair<pair<int, int>, int>> melted_ice;
     for (int j = 0; j < r; j++)
@@ -21,6 +22,7 @@ int melt_ice(int board[300][300], int r, int c)
             {
                 pieces++;
 
+                // bfs
                 queue<pair<int, int>> q;
                 q.push({j, i});
                 visited[j][i] = true;
@@ -37,35 +39,28 @@ int melt_ice(int board[300][300], int r, int c)
                         int ny = cy + dy[k];
                         int nx = cx + dx[k];
 
-                        if (0 <= ny && ny < r && 0 <= nx && nx < c)
+                        if (0 > ny || ny >= r || 0 > nx || nx >= c)
+                            continue;
+
+                        if (board[ny][nx] == 0)
+                            adj_water++;
+                        else if (!visited[ny][nx])
                         {
-                            if (board[ny][nx] == 0)
-                            {
-                                adj_water++;
-                            }
-                            else
-                            {
-                                if (!visited[ny][nx])
-                                {
-                                    q.push({ny, nx});
-                                    visited[ny][nx] = true;
-                                }
-                            }
+                            q.push({ny, nx});
+                            visited[ny][nx] = true;
                         }
                     }
+
                     if (adj_water > 0)
-                    {
                         melted_ice.push_back({{cy, cx}, max(board[cy][cx] - adj_water, 0)});
-                    }
                 }
             }
         }
     }
 
+    // update board
     for (int i = 0; i < melted_ice.size(); i++)
-    {
         board[melted_ice[i].first.first][melted_ice[i].first.second] = melted_ice[i].second;
-    }
 
     return pieces;
 }
@@ -81,12 +76,8 @@ int main()
 
     int board[300][300] = {0};
     for (int j = 0; j < N; j++)
-    {
         for (int i = 0; i < M; i++)
-        {
             cin >> board[j][i];
-        }
-    }
 
     int time = 0;
     while (true)

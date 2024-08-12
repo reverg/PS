@@ -5,7 +5,7 @@
 using namespace std;
 
 int N, M;
-vector<int> numbers;
+int numbers[8];
 vector<int> cands;
 
 void backtrack(int cnt)
@@ -35,12 +35,9 @@ int main()
 {
     cin >> N >> M;
     for (int i = 0; i < N; i++)
-    {
-        int tmp;
-        cin >> tmp;
-        numbers.emplace_back(tmp);
-    }
-    sort(numbers.begin(), numbers.end());
+        cin >> numbers[i];
+
+    sort(numbers, numbers + N);
 
     backtrack(M);
 }

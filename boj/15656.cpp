@@ -35,6 +35,7 @@ int main()
         cin >> tmp;
         numbers.emplace_back(tmp);
     }
+
     sort(numbers.begin(), numbers.end());
 
     backtrack(M);

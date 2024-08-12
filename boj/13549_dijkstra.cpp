@@ -49,3 +49,7 @@ int main()
     dijkstra(N);
     cout << dist[K];
 }
+
+/*
+bfs 풀이의 설명 참고.
+*/

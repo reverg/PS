@@ -32,13 +32,9 @@ int main()
         {
             cin >> maze[j][i];
             if (maze[j][i] == 'J')
-            {
                 jihoon = pair(j, i);
-            }
             else if (maze[j][i] == 'F')
-            {
                 q.push(CellStat{'F', j, i, 0});
-            }
         }
     }
     q.push(CellStat{'J', jihoon.first, jihoon.second, 0});
@@ -87,11 +83,11 @@ int main()
 
 conclusion:
     if (ans != -1)
-    {
         cout << ans << endl;
-    }
     else
-    {
         cout << "IMPOSSIBLE" << endl;
-    }
 }
+
+/*
+#5427과 동일 문제.
+*/

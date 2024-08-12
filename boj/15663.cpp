@@ -4,30 +4,31 @@
 using namespace std;
 
 int N, M;
-int num[9], print[9];
-bool check[9];
+int nums[9];
+vector<int> candidates;
+bool selected[9];
 
-void backtrack(int rem)
+void backtrack(int cnt)
 {
-    if (rem == 0)
+    if (cnt == 0)
     {
-        for (int i = M; i > 0; i--)
-            cout << print[i] << ' ';
+        for (int i = 0; i < M; i++)
+            cout << candidates[i] << ' ';
         cout << '\n';
         return;
     }
 
     int prev_num = 0;
-
     for (int i = 0; i < N; i++)
     {
-        if (!check[i] && (prev_num != num[i]))
+        if (!selected[i] && (prev_num != nums[i]))
         {
-            check[i] = true;
-            print[rem] = num[i];
-            prev_num = num[i];
-            backtrack(rem - 1);
-            check[i] = false;
+            selected[i] = true;
+            candidates.push_back(nums[i]);
+            prev_num = nums[i];
+            backtrack(cnt - 1);
+            selected[i] = false;
+            candidates.pop_back();
         }
     }
 }
@@ -36,10 +37,15 @@ int main()
 {
     cin >> N >> M;
     for (int i = 0; i < N; i++)
-        cin >> num[i];
-    sort(num, num + N);
+        cin >> nums[i];
+
+    sort(nums, nums + N);
 
     backtrack(M);
-
-    return 0;
 }
+
+/*
+문제 조건상 중복된 수열을 출력하면 안되므로 같은 숫자를 여러 번
+고르지 않게 prev_num을 뒀다. backtrack()이 호출 될 때마다 수를
+하나씩 고르므로, 같은 자리에 직전에 쓴 숫자가 들어가지 않게 된다.
+*/

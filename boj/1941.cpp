@@ -53,11 +53,8 @@ void backtrack(int cnt, int pos, int s)
 {
     if (cnt == 7)
     {
-        if (s >= 4)
-        {
-            if (bfs(pos))
-                ans_cnt++;
-        }
+        if (s >= 4 && bfs(pos))
+            ans_cnt++;
         return;
     }
 
@@ -81,3 +78,11 @@ int main()
 
     cout << ans_cnt << '\n';
 }
+
+/*
+조합 + BFS. 인접한 조합의 위치를 만들어내려고 하면 문제가
+상당히 어려워지고, 그냥 조합을 모두 만들고 그게 인접해있는지
+확인하는게 편하다. 67행에 backtrack(i+1)이 아닌건 bfs를 돌릴 때
+마지막 지점 좌표를 쓰기 때문이다. 벡터 등으로 따로 관리하면 i+1로
+해도 무방할 것이다.
+*/

@@ -24,22 +24,23 @@ void bfs()
             int ny = y + dy[k];
             int nx = x + dx[k];
 
-            if (0 <= nx && nx < M && 0 <= ny && ny < N)
-            {
-                if (arr[ny][nx] == 0)
-                {
-                    dist[ny][nx] = dist[y][x] + 1;
-                    arr[ny][nx] = 1;
-                    q.push(make_pair(ny, nx));
-                }
-            }
+            if (0 > nx || nx >= M || 0 > ny || ny >= N)
+                continue;
+            if (arr[ny][nx] != 0)
+                continue;
+
+            dist[ny][nx] = dist[y][x] + 1;
+            arr[ny][nx] = 1;
+            q.push({ny, nx});
         }
     }
 }
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     cin >> M >> N;
     for (int j = 0; j < N; j++)
@@ -48,7 +49,7 @@ int main()
         {
             cin >> arr[j][i];
             if (arr[j][i] == 1)
-                q.push(make_pair(j, i));
+                q.push({j, i});
         }
     }
 
@@ -68,5 +69,5 @@ int main()
         }
     }
 
-    cout << day;
+    cout << day << '\n';
 }

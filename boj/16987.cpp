@@ -22,9 +22,7 @@ void backtrack(int pos)
     }
 
     if (egg_stat[pos].first <= 0)
-    {
         backtrack(pos + 1);
-    }
     else
     {
         bool hit = false;
@@ -32,20 +30,17 @@ void backtrack(int pos)
         {
             if (trg == pos || egg_stat[trg].first <= 0)
                 continue;
-            else
-            {
-                egg_stat[trg].first -= egg_stat[pos].second;
-                egg_stat[pos].first -= egg_stat[trg].second;
-                backtrack(pos + 1);
-                hit = true;
-                egg_stat[trg].first += egg_stat[pos].second;
-                egg_stat[pos].first += egg_stat[trg].second;
-            }
-        }
-        if (!hit)
-        {
+
+            egg_stat[trg].first -= egg_stat[pos].second;
+            egg_stat[pos].first -= egg_stat[trg].second;
             backtrack(pos + 1);
+            hit = true;
+            egg_stat[trg].first += egg_stat[pos].second;
+            egg_stat[pos].first += egg_stat[trg].second;
         }
+
+        if (!hit)
+            backtrack(pos + 1);
     }
 }
 

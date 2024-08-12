@@ -161,3 +161,11 @@ int main()
 
     cout << max_flowers << '\n';
 }
+
+/*
+backtracking으로 보드 세팅하는 부분은 next_permutation을 쓰면 정말 간단하게 구현 가능하다.
+또한 현재 코드에서는 초록 배양액과 빨강 배양액이 같은 시간에 도달하는 것을 확인하고자 큐를 따로
+두고 순차적으로 전파시켰는데, 시간 정보를 따로 저장해주면 하나의 큐에 같이 넣고 bfs를 돌려도 된다.
+아니면 2개 큐를 합치되 초록 배양액 칸 수 + 빨강 배양액 칸 수 만큼씩 끊어서 퍼뜨리는 것도 가능할 것이다.
+풀이 참조: https://github.com/encrypted-def/basic-algo-lecture/blob/master/0x0C/solutions/18809.cpp
+*/
