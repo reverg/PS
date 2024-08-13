@@ -8,14 +8,13 @@ using namespace std;
 
 int N, K;
 bool visited[100001] = {false};
-int parent[100001] = {0};
+int prv[100001] = {0};
 queue<pair<int, int>> q;
 
 void bfs(int N, int K)
 {
-    for (int i = 0; i < 100001; i++)
-        parent[i] = INF;
-    q.push(make_pair(N, 0));
+    fill(prv, prv + 100001, -1);
+    q.push({N, 0});
 
     while (!q.empty())
     {
@@ -32,7 +31,7 @@ void bfs(int N, int K)
             while (pos != N)
             {
                 rec.push(pos);
-                pos = parent[pos];
+                pos = prv[pos];
             }
             rec.push(N);
             while (!rec.empty())
@@ -46,23 +45,23 @@ void bfs(int N, int K)
 
         if (cur - 1 >= 0 && !visited[cur - 1])
         {
-            q.push(make_pair(cur - 1, time + 1));
+            q.push({cur - 1, time + 1});
             visited[cur - 1] = true;
-            parent[cur - 1] = cur;
+            prv[cur - 1] = cur;
         }
 
         if (cur + 1 <= 100000 && !visited[cur + 1])
         {
-            q.push(make_pair(cur + 1, time + 1));
+            q.push({cur + 1, time + 1});
             visited[cur + 1] = true;
-            parent[cur + 1] = cur;
+            prv[cur + 1] = cur;
         }
 
         if (cur * 2 <= 100000 && !visited[cur * 2])
         {
-            q.push(make_pair(cur * 2, time + 1));
+            q.push({cur * 2, time + 1});
             visited[cur * 2] = true;
-            parent[cur * 2] = cur;
+            prv[cur * 2] = cur;
         }
     }
 
@@ -71,8 +70,16 @@ void bfs(int N, int K)
 
 int main()
 {
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     cin >> N >> K;
+
     bfs(N, K);
 }
+
+/*
+#12851에다 최단경로 역추적.
+직전에 방문한 노드를 기록해놨다 거꾸로 돌아가며 출력해주면 된다.
+*/
