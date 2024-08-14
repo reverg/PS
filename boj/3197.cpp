@@ -12,11 +12,6 @@ queue<pair<int, int>> swanQ, waterQ;
 int dy[4] = {0, -1, 0, 1};
 int dx[4] = {1, 0, -1, 0};
 
-inline bool inboard(int y, int x)
-{
-    return 0 <= y && y < R && 0 <= x && x < C;
-}
-
 void meltIce()
 {
     int qs = waterQ.size();
@@ -30,24 +25,28 @@ void meltIce()
         {
             int ny = cy + dy[k];
             int nx = cx + dx[k];
-            if (inboard(ny, nx) && board[ny][nx] == 'X')
-            {
-                board[ny][nx] = '.';
-                waterQ.push({ny, nx});
-            }
+
+            if (ny < 0 || ny >= R || nx < 0 || nx >= C)
+                continue;
+            if (board[ny][nx] != 'X')
+                continue;
+
+            board[ny][nx] = '.';
+            waterQ.push({ny, nx});
         }
     }
 }
 
 bool canMeet()
 {
-    queue<pair<int, int>> q;
+    queue<pair<int, int>> boundaryQ;
 
     while (!swanQ.empty())
     {
         int cy = swanQ.front().first;
         int cx = swanQ.front().second;
         swanQ.pop();
+
         if (cy == swans[1].first && cx == swans[1].second)
             return true;
 
@@ -56,18 +55,20 @@ bool canMeet()
             int ny = cy + dy[k];
             int nx = cx + dx[k];
 
-            if (!inboard(ny, nx) || visited[ny][nx])
+            if (ny < 0 || ny >= R || nx < 0 || nx >= C)
+                continue;
+            if (visited[ny][nx])
                 continue;
 
             visited[ny][nx] = true;
             if (board[ny][nx] == 'X')
-                q.push({ny, nx});
+                boundaryQ.push({ny, nx});
             else
                 swanQ.push({ny, nx});
         }
     }
 
-    swanQ = q;
+    swanQ = boundaryQ;
     return false;
 }
 
@@ -82,14 +83,9 @@ int main()
             cin >> board[j][i];
 
             if (board[j][i] == 'L')
-            {
                 swans.push_back({j, i});
+            if (board[j][i] == '.' || board[j][i] == 'L')
                 waterQ.push({j, i});
-            }
-            else if (board[j][i] == '.')
-            {
-                waterQ.push({j, i});
-            }
         }
     }
 
@@ -105,3 +101,12 @@ int main()
     }
     cout << time << '\n';
 }
+
+/*
+구현이 복잡한 BFS.
+물을 담는 waterQ와 백조가 갈 수 있는 경계를 담는 swanQ를 쓴다.
+waterQ는 크기만큼 하는 BFS로 물이 있는 구역을 확장한다.
+swanQ는 백조가 갈 수 있는 경계를 담아둔건데, 다음 턴에 이 부분이
+모두 물이 되므로 거기부터 백조가 도달할 수 있는 새로운 얼음 경계를
+찾으면 된다. 중간에 다른 백조를 만나면 멈추고 걸린 시간을 출력.
+*/

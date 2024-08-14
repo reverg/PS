@@ -6,24 +6,20 @@ using namespace std;
 
 int N, M, P;
 int S[10];
+char board[1000][1000];
 int dy[4] = {0, -1, 0, 1};
 int dx[4] = {1, 0, -1, 0};
 
-struct Loc
+void solve()
 {
-    int y, x;
-};
-
-void solve(char board[][1000])
-{
-    queue<Loc> q[P + 1];
+    queue<pair<int, int>> q[P + 1];
     for (int j = 0; j < N; j++)
     {
         for (int i = 0; i < M; i++)
         {
             cin >> board[j][i];
             if (board[j][i] != '.' && board[j][i] != '#')
-                q[board[j][i] - '0'].push(Loc{j, i});
+                q[board[j][i] - '0'].push({j, i});
         }
     }
 
@@ -38,8 +34,7 @@ void solve(char board[][1000])
                 int states = q[p].size();
                 for (int st = 0; st < states; st++)
                 {
-                    int cy = q[p].front().y;
-                    int cx = q[p].front().x;
+                    auto [cy, cx] = q[p].front();
                     q[p].pop();
 
                     for (int k = 0; k < 4; k++)
@@ -53,7 +48,7 @@ void solve(char board[][1000])
                         if (board[ny][nx] == '.')
                         {
                             board[ny][nx] = char(p + '0');
-                            q[p].push(Loc{ny, nx});
+                            q[p].push({ny, nx});
                             constructed = true;
                         }
                     }
@@ -71,9 +66,7 @@ int main()
     for (int i = 1; i <= P; i++)
         cin >> S[i];
 
-    char board[1000][1000];
-
-    solve(board);
+    solve();
 
     int ans[10];
     for (int j = 0; j < N; j++)
@@ -84,3 +77,10 @@ int main()
         cout << ans[i] << ' ';
     return 0;
 }
+
+/*
+턴을 나눠 BFS하는 문제. 처음 큐에 있는 원소 수만큼
+확장을 해주면 1턴이 된다. 자주 사용되는 아이디어이므로
+기억해두자. 지금 board를 전역변수로 뺐는데 BOJ에서는
+main 안에 넣어주지 않으면 오답처리된다. 맞왜틀?
+*/

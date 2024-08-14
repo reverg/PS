@@ -4,24 +4,22 @@
 
 using namespace std;
 
+int N, M;
+vector<pair<int, int>> switches[101][101];
+bool lighted[101][101];
+bool visited[101][101];
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, -1, 0, 1};
 
 int main()
 {
-    int N, M;
     cin >> N >> M;
-
-    vector<pair<int, int>> switches[101][101];
     for (int i = 0; i < M; i++)
     {
         int x, y, a, b;
         cin >> x >> y >> a >> b;
         switches[x][y].push_back({a, b});
     }
-
-    bool lighted[101][101] = {false};
-    bool visited[101][101] = {false};
 
     queue<pair<int, int>> q;
     q.push({1, 1});
@@ -39,6 +37,7 @@ int main()
             int sx = switches[cx][cy][i].first;
             int sy = switches[cx][cy][i].second;
             lighted[sx][sy] = true;
+
             for (int k = 0; k < 4; k++)
             {
                 // if we visited adjacent room of newly lighted room,
@@ -80,3 +79,10 @@ int main()
 
     cout << ans << '\n';
 }
+
+/*
+새로 불이 켜진 곳이 이전에 방문했던 곳과 인접해있으면 그 방에
+도달할 수 있다는 뜻이므로 큐에 추가해준다. 끊겨있다가 불이
+켜지면서 새로 도달 가능해진 방도 있으므로 인접한 방들도 불이
+켜져있는데 방문하지 않았으면 큐에 추가해줘야 한다.
+*/
