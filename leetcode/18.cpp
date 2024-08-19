@@ -86,6 +86,7 @@ public:
 /*
 Two pointer -> (Runtime, Memory) = (99.51%, 25.07%)
 Hash -> (Runtime, Memory) = (25.98%, 36.30%)
+#1 -> #454 -> #15 -> #18로 이어진다.
 
 말만 four sum이고 사실상 k sum 문제가 되어버렸다. 사용된 4개 수의 index가 모두
 달라야 해서 머리가 아픈데 재귀적으로 (target - 수 1개)를 (k-1) sum으로 만드는 방식을

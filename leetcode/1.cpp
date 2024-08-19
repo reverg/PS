@@ -16,6 +16,7 @@ public:
 };
 
 /*
+#1 -> #454 -> #15 -> #18로 이어진다.
 brute force로 다 확인하면 O(N^2), 정렬하고 two pointer나
 binary search 쓰면 O(NlogN), hash table에 넣으면 O(N).
 */
