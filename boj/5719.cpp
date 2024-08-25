@@ -54,7 +54,7 @@ void dijkstra()
 void remove_path()
 {
     // using prev node info,
-    // remove path by bfs
+    // remove path by BFS
     queue<int> q;
     bool visited[500] = {false};
     visited[D] = true;
@@ -131,4 +131,6 @@ int main()
 /*
 다익스트라 + 경로 추적 + 역방향 BFS + 다익스트라.
 구현이 좀 성가시긴 한데 아이디어는 익숙한 것들이다.
+최단 경로가 여러 개 있을 수 있어서 BFS를 써야 모든 경로를
+지울 수 있음에 유의.
 */

@@ -40,7 +40,6 @@ int main()
         graph[to].push_back({from, cost});
         graph[from].push_back({to, cost});
     }
-    ㄹㄹ
 
     fill(cost_record, cost_record + 100001, 0x7f7f7f7f7f7f);
 

@@ -20,7 +20,7 @@ public:
 };
 
 /*
-(Runtime, Memory) = (99.94%, 81.67%). #621 -> #2365로 이어진다.
+(Runtime, Memory) = (99.94%, 81.67%). #621 -> #2365로 이어진다. #358도 참고.
 중간에 idle한 cycle이 안 생기면 tasks의 크기가 최소 cycle이다. idle이 생기는
 경우는 가장 많이 실행된 task들의 쿨타임 때문에 붕 뜨는 시간이 생기는 것인데,
 max_occur과 max_count로 따로 센 다음 가장 많이 실행된 task들을 최대한 빨리
