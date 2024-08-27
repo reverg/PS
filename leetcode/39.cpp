@@ -41,7 +41,7 @@ public:
 };
 
 /*
-(Runtime, Memory) = (79.22%, 42.27%).
+(Runtime, Memory) = (79.22%, 42.27%). BOJ 동전 문제들과 비슷하다.
 backtracking으로 다 해보는 풀이. 같은 동전을 여러 번 쓰는게 가능하므로
 bottom-up DP를 쓰는 풀이도 가능하다. 다만 target이 작고 모든 조합을 다
 출력해야 하는 문제여서 DP가 실제 실행시간상으로 도움이 되진 않는다.
@@ -55,7 +55,7 @@ public:
         dp[0] = {{}};
 
         for (int i : nums){
-            for (int j = i; j <= target; j++){
+            for (int j = i; j <= target / i; j++){
                 for (auto v : dp[j - i]){
                     v.push_back(i);
                     dp[j].push_back(v);

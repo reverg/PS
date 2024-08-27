@@ -20,7 +20,7 @@ int main()
         {
             for (int j = coins[i]; j <= M; j++)
             {
-                    dp[j] += dp[j - coins[i]];
+                dp[j] += dp[j - coins[i]];
             }
         }
 

@@ -12,7 +12,7 @@ public:
         vector<vector<int>> ans;
         for (int i = 0; i < nums.size() - 2; i++)
         {
-            if (nums[i] > 0) // i<j<k triple 만들 예정이라 합 0 불가능ㄴ
+            if (nums[i] > 0) // i<j<k triple 만들 예정이라 합 0 불가능
                 break;
 
             for (int j = i + 1; j < nums.size() - 1; j++)

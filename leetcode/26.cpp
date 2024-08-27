@@ -9,7 +9,7 @@ public:
 (Runtime, Memory) = (100.00%, 16.14%). 편차가 커서 의미는 없음.
 STL은 신이다. unique가 iterator를 반환함을 기억해두자.
 
-포인터 2개로 중복 자리에 덮었는 정석 풀이는 아래 참고:
+포인터 2개로 중복 자리에 덮어쓰는 정석 풀이는 아래 참고:
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {

@@ -33,4 +33,37 @@ string 조합 부분이 O(N)이므로 시간복잡도는 O(4^N / sqrt(N))이다.
 
 backtracking으로 여는 괄호가 닫는 괄호보다 많게 유지하는 풀이도 가능하다.
 당연히 시간복잡도와 공간복잡도는 동일하다.
+class Solution
+{
+public:
+    vector<string> generateParenthesis(int n)
+    {
+        vector<string> answer;
+        backtracking(answer, "", 0, 0, n);
+        return answer;
+    }
+
+private:
+    void backtracking(vector<string> &answer, string curString, int leftCount,
+                      int rightCount, int n)
+    {
+        if (curString.size() == 2 * n)
+        {
+            answer.push_back(curString);
+            return;
+        }
+        if (leftCount < n)
+        {
+            curString += '(';
+            backtracking(answer, curString, leftCount + 1, rightCount, n);
+            curString.pop_back();
+        }
+        if (leftCount > rightCount)
+        {
+            curString += ')';
+            backtracking(answer, curString, leftCount, rightCount + 1, n);
+            curString.pop_back();
+        }
+    }
+};
 */
